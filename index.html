@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>URL-SRT-Asist</title>
+</head>
+<style>
+body{
+    padding: 0%;
+    margin: 0%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 0%;
+}
+
+input[type="text"] {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    border-style: none;
+    margin: 2px;
+}
+
+.resultado{
+    position: relative;
+    top: 9px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    border-style: none;
+    margin: 2px;
+    color: white;
+}
+
+.ventana{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.568);
+    text-align: center;
+    width: 80%;
+    height: 330px;
+    padding: 20px;
+    border-radius: 13px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.camboObligatorio{
+    color: white;
+    position: relative;
+    top: 3px;
+    left: 6px;
+}
+.camboNOObligatorio{
+    opacity: 0;
+    color: white;
+    position: relative;
+    top: 3px;
+    left: 6px;
+}
+</style>
+<body>
+
+    <div id="ventana" class="ventana">
+        <input type="text" id="mode" class="input" placeholder="mode"><label class="camboObligatorio">*</label><br>
+        <input type="text" id="ipInput" placeholder="0.0.0.0"><label class="camboObligatorio">*</label><br>
+        <input type="text" id="port" class="input" placeholder="number port"><label class="camboObligatorio">*</label><br>
+        <input type="text" id="passphrase" class="input" placeholder="passphrase"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="aes" class="input" placeholder="AES"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="latency" class="input" placeholder="latency (seconds)"><label class="camboObligatorio">*</label><br>
+        <input type="text" id="transtype" class="input" placeholder="transmission type" list="opciones3"><label class="camboNOObligatorio">*</label><br>
+            <datalist id="opciones3">
+                <option value="live">
+                <option value="file">
+                <option value="mux">
+                <option value="passthru">
+                <option value="reliable">
+                <option value="raw">
+            </datalist>
+        <input type="text" id="pkt_size" class="input" placeholder="bytes/pkt"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="maxbw" class="input" placeholder="max bw (Mbytes/s)"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="minversion" class="input" placeholder="min version compatible"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="maxversion" class="input" placeholder="max version compatible"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="payloadS" class="input" placeholder="Payload (Bytes utiles/pkt)"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="backLog" class="input" placeholder="backlog (#pkt)"><label class="camboNOObligatorio">*</label><br>
+        <input type="text" id="streamID" class="input" placeholder="ID"><label class="camboNOObligatorio">*</label><br>
+        <text id="url" class="resultado"></text>
+    </div>     
+<script>
+
+
+let mode = document.getElementById("mode")
+mode.addEventListener("keyup", (e) => {
+    if(e.key === "c"){
+        mode.value = "caller"
+        let ip = document.getElementById("ipInput")
+        ip.focus()
+        sintaxis()
+    }else{
+        if(e.key === "l"){
+            mode.value = "listener"
+            let ip = document.getElementById("ipInput")
+            ip.focus()
+            sintaxis()
+        }else{
+            mode.value = ""
+        }
+    }
+})
+
+let ip = document.getElementById("ipInput")
+ip.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validateIP(ip.value)
+        if(sigo == "OK"){
+            let port = document.getElementById("port")
+            port.focus()
+            sintaxis()
+        }else{
+            ip.value = ""
+        }
+    }
+})
+
+let port = document.getElementById("port")
+port.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorPort(port.value)
+        if(sigo == "OK"){
+            let passphrase = document.getElementById("passphrase")
+            passphrase.focus()
+            sintaxis()
+        }
+    }
+})
+let passphrase = document.getElementById("passphrase")
+passphrase.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorPHRASE(passphrase.value)
+        if(sigo == "OK"){
+            let aes = document.getElementById("aes")
+            aes.focus()
+            sintaxis()
+        }
+        if(sigo == "OK2"){
+            let latency = document.getElementById("latency")
+            latency.focus()
+            sintaxis()
+        }
+    }
+})
+let aes = document.getElementById("aes")
+aes.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorAES(aes.value)
+        if(sigo == "OK"){
+            let latency = document.getElementById("latency")
+            latency.focus()
+            sintaxis()
+        }
+        if(sigo == "NO"){
+            passphrase.value = ""
+            let latency = document.getElementById("latency")
+            latency.focus()
+            sintaxis()
+        }
+    }
+})
+let latency = document.getElementById("latency")
+latency.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorLatencia(latency.value)
+        if(sigo == "OK"){
+            let transtype = document.getElementById("transtype")
+            transtype.focus()
+            sintaxis()
+        }else{
+            if(sigo == "NO"){
+                latency.value =""
+            }
+        }
+    }
+})
+let transtype = document.getElementById("transtype")
+transtype.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorTT(transtype.value)
+        if(sigo == "OK"){
+            let pkt_size = document.getElementById("pkt_size")
+            pkt_size.focus()
+            sintaxis()
+        }else{
+            if(sigo == "NO"){
+                transtype.value = ""
+                let pkt_size = document.getElementById("pkt_size")
+                pkt_size.focus()
+                sintaxis()
+            }
+        }
+    }
+})
+let pkt_size = document.getElementById("pkt_size")
+pkt_size.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorPKTS(pkt_size.value)
+        if(sigo == "OK"){
+            let maxbw = document.getElementById("maxbw")
+            maxbw.focus()
+            sintaxis()
+        }else{
+            pkt_size.value = ""
+            let maxbw = document.getElementById("maxbw")
+            maxbw.focus()
+            sintaxis()
+        }
+    }
+})
+let maxbw = document.getElementById("maxbw")
+maxbw.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorMBW(maxbw.value)
+        if(sigo == "OK"){
+            let minVC = document.getElementById("minversion")
+            minVC.focus()
+            sintaxis()
+        }else{
+            if(sigo == "NO"){
+                maxbw.value = ""
+                sintaxis()
+            }
+        }
+    }
+})
+let minVC = document.getElementById("minversion")
+minVC.addEventListener("keydown",  (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorMinVer(minVC.value)
+        if(sigo == "OK"){
+            let maxVC = document.getElementById("maxversion")
+            maxVC.focus()
+            sintaxis()
+        }else{
+            if(sigo == "NO"){
+                minVC.value = ""
+            }
+        }
+    }
+})
+let maxVC = document.getElementById("maxversion")
+maxVC.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorMaxVer(maxVC.value)
+        if(sigo == "OK"){
+            let payloadS = document.getElementById("payloadS")
+            payloadS.focus()
+            sintaxis()
+        }else{
+            if(sigo == "NO"){
+                maxVC.value = ""
+            }
+        }
+    }
+})
+let payloadS = document.getElementById("payloadS")
+payloadS.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorPayload(payloadS.value)
+        if(sigo == "OK"){
+            let backLog = document.getElementById("backLog")
+            backLog.focus()
+            sintaxis()
+        }else{
+            if(sigo == "NO"){
+                payloadS.value = ""
+            }
+        }
+    }
+})
+let backLog = document.getElementById("backLog")
+backLog.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        let sigo = validadorBacklog(backLog.value)
+        if(sigo == "OK"){
+            let streamID = document.getElementById("streamID")
+            streamID.focus()
+            sintaxis()
+        }else{
+            backLog.value = ""
+        }
+    }
+})
+let streamID = document.getElementById("streamID")
+streamID.addEventListener("keydown", (e) => {
+    if(e.key === 'Enter'){
+        sintaxis()
+    }
+})
+
+extraccion('imagenes.txt')
+
+function extraccion(a){
+    let ubicaciondeltxt = a
+    fetch(ubicaciondeltxt)
+    .then(response => response.text())
+    .then(data => {
+        let temp = data.split('\\n')
+        const randomIndex = Math.floor(Math.random() * temp.length);
+        const randomImage = temp[randomIndex];
+        document.body.style.backgroundImage = `url(${randomImage})`;
+
+    })
+}
+
+mode.focus()
+
+function sintaxis(){
+    let fijo = 'srt://'
+    let mode = document.getElementById("mode").value
+    let ip = document.getElementById("ipInput").value
+    let port = document.getElementById("port").value
+    let aes = document.getElementById("aes").value
+    let passphrase = document.getElementById("passphrase").value
+    let latency = document.getElementById("latency").value
+    let transmission = document.getElementById("transtype").value
+    let tamanopaquetes = document.getElementById("pkt_size").value
+    let maximoanchodebanda = document.getElementById("maxbw").value
+    let versionMinima = document.getElementById("minversion").value
+    let versionMaxima = document.getElementById("maxversion").value
+    let payloadsize = document.getElementById("payloadS").value
+    let fila = document.getElementById("backLog").value
+    let identificador = document.getElementById("streamID").value
+    let url = document.getElementById("url")
+    let llamada
+    if(mode.length == 0){
+        llamada = ""
+    }else{
+        llamada = `mode=${mode}`
+    }
+    let direccion
+    if(ip.length == 0){
+        direccion = ""
+    }else{
+        direccion = ip
+    }
+    let puerto
+    if(port.length == 0){
+        puerto = ""
+    }else{
+        puerto = port
+    }
+    let latencia
+    if(latency.length == 0){
+        latencia = "&latency=1000"
+    }else{
+        latencia = `&latency=${latency*1000}`
+    }
+    let codigo1
+    if(passphrase.length == 0){
+        codigo1 = ""
+    }else{
+        codigo1 = `passphrase=${passphrase}`
+    }
+    let codigo2
+    if(aes.length == 0){
+        codigo2 = ""
+    }else{
+        codigo2 = `pbkeylen=${aes/8}`
+    }
+    let codigoconsolidado
+    if(aes.length == 0 || passphrase.length == 0){
+        codigoconsolidado = ""
+    }else{
+        codigoconsolidado = `&${codigo2}&${codigo1}`
+    }
+    let tipodetrasmision
+    if(transmission.length == 0){
+        tipodetrasmision = ""
+    }else{
+        tipodetrasmision = `&transtype=${transmission}`
+    }
+    let paketsize
+    if(tamanopaquetes.length == 0){
+        paketsize = ""
+    }else{
+        paketsize = `&pkt_size=${tamanopaquetes}`
+    }
+    let maximoBW
+    if(maximoanchodebanda.length == 0){
+        maximoBW = ""
+    }else{
+        maximoBW = `&maxbw=${maximoanchodebanda*8000000}`
+    }
+    let minima
+    if(versionMinima.length == 0){
+        minima = ""
+    }else{
+        minima = `&minversion=${versionMinima}`
+    }
+    let maxima
+    if(versionMaxima.length == 0){
+        maxima = ""
+    }else{
+        maxima = `&maxversion=${versionMaxima}`
+    }
+    let datosutiles
+    if(payloadsize.length == 0){
+        datosutiles = ""
+    }else{
+        datosutiles = `&payloadsize=${payloadsize}`
+    }
+    let datosenfila
+    if(fila.length == 0){
+        datosenfila = ""
+    }else{
+        datosenfila = `&backlog=${fila}`
+    }
+    let identifSTR
+    if(identificador.length == 0){
+        identifSTR = ""
+    }else{
+        identifSTR = `&streamid=${identificador}`
+    }
+    let scheme = `${fijo}${direccion}:${puerto}?${llamada}${latencia}${codigoconsolidado}${tipodetrasmision}${paketsize}${maximoBW}${minima}${maxima}${datosutiles}${datosenfila}${identifSTR}`
+    if(mode != "" && ip != "" && port != "" && latency != ""){
+        url.innerText = scheme
+    }
+}
+function validateIP(a){
+    let partes = a.split(".")
+    if(partes[0] > -1 && partes[0] < 256 && partes[1] > -1 && partes[1] < 256 && partes[2] > -1 && partes[2] < 256 && partes[3] > -1 && partes[3] < 256){
+        return "OK"
+    }
+}
+function validadorPort(a){
+    let numeroobligado = parseInt(a)
+
+    if(numeroobligado > 0){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorPHRASE(a){
+    if(a.length > 0){
+        return "OK"
+    }else{
+        return "OK2"
+    }
+}
+function validadorAES(a){
+    if(a == "128" || a == "192" || a == "256"){
+        return "OK"
+    }
+    if(a == ""){
+        return "NO"
+    }
+}
+function validadorLatencia(a){
+    let numeroobligado = parseFloat(a)
+    if(numeroobligado > 0){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorTT(a){
+    if(a == "live" || a == "file" || a == "mux" || a == "passthru" || a == "reliable" || a == "raw" || a == ""){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorPKTS(a){
+    let numeroobligado = parseFloat(a)
+    if(numeroobligado > 49 && numeroobligado < 2000){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorMBW(a){
+    let numeroobligado = parseInt(a)
+    if(numeroobligado > 0){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorMinVer(a){
+    if(a == "1.0" || a == "1.1" || a == "1.2" || a == "1.3" || a == "1.4"){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorMaxVer(a){
+    if(a == "1.0" || a == "1.1" || a == "1.2" || a == "1.3" || a == "1.4"){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorPayload(a){
+    let numeroobligado = parseInt(a)
+    if(numeroobligado > 80 && numeroobligado < 1500){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+function validadorBacklog(a){
+    let numeroobligado = parseInt(a)
+    if(numeroobligado > 0 && numeroobligado < 120){
+        return "OK"
+    }else{
+        return "NO"
+    }
+}
+</script>
+</body>
+</html>
