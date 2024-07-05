@@ -10,10 +10,11 @@
 body{
     padding: 0%;
     margin: 0%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-position-y: 0%;
+    width: 100%;
+    height: 100vh;
+    align-content: center;
+    box-shadow: rgba(0, 0, 0, 0.85) inset 0px 50px 100px 30px;
+
 }
 
 input[type="text"] {
@@ -41,16 +42,52 @@ input[type="text"] {
 }
 
 .ventana{
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.568);
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: hwb(0 0% 100% / 0.5);
     text-align: center;
-    width: 80%;
-    height: 430px;
+    width: 420px;
+    height: 450px;
     padding: 20px;
+    
     border-radius: 13px;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+    transform-origin: 50%;
+
+
+}
+
+
+@keyframes mi-animacion {
+    0% {
+
+
+
+
+
+    
+    }
+    50% { 
+
+
+        transform: scale(0.01);
+
+
+
+
+
+    
+    }
+    100% { 
+        
+
+
+
+
+
+    
+    }
 }
 
 .camboObligatorio{
@@ -67,7 +104,8 @@ input[type="text"] {
     left: 6px;
 }
 </style>
-<body>
+<body id="cuerpo">
+    <div id="cuerpo2">
 
     <div id="ventana" class="ventana">
         <input type="text" id="mode" class="input" placeholder="mode"><label class="camboObligatorio">*</label><br>
@@ -93,9 +131,23 @@ input[type="text"] {
         <input type="text" id="backLog" class="input" placeholder="backlog (#pkt)"><label class="camboNOObligatorio">*</label><br>
         <input type="text" id="streamID" class="input" placeholder="ID"><label class="camboNOObligatorio">*</label><br>
         <text id="url" class="resultado"></text>
-    </div>     
+    </div> 
+    
+</div>
 <script>
 
+/*
+addEventListener("keydown", (e) => {
+    if(e.key === 't'){
+        const miElemento = document.querySelector('.mi-elemento');
+
+        // Cambia el color de fondo al hacer clic
+        miElemento.addEventListener('click', () => {
+        miElemento.style.backgroundColor = 'red';
+    });
+    }
+})
+*/
 
 let mode = document.getElementById("mode")
 mode.addEventListener("keyup", (e) => {
@@ -304,22 +356,33 @@ streamID.addEventListener("keydown", (e) => {
     }
 })
 
-extraccion('imagenes.txt')
+extraccion()
 
-function extraccion(a){
-    let ubicaciondeltxt = a
+function extraccion(){
+    let cuerpo = document.getElementById("cuerpo")
+    let urlactual = cuerpo.style.backgroundImage
+    console.log(urlactual.substring(5, urlactual.length - 2))
+
+    let ubicaciondeltxt = 'imagenes.txt'
     fetch(ubicaciondeltxt)
     .then(response => response.text())
     .then(data => {
-        let temp = data.split('\\n')
-        const randomIndex = Math.floor(Math.random() * temp.length);
-        const randomImage = temp[randomIndex];
-        document.body.style.backgroundImage = `url(${randomImage})`;
 
+        let temp = data.split('\\n')
+        temp.sort()
+        const randomIndex = Math.floor(Math.random()*1000);
+        console.log(randomIndex % temp.length)
+        const randomImage = temp[randomIndex % temp.length];
+        document.body.style.backgroundImage = `url(${randomImage})`;
     })
+
 }
 
+//setInterval(extraccion, 60000);
+
 mode.focus()
+
+
 
 function sintaxis(){
     let fijo = 'srt://'
