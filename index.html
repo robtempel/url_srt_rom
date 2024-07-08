@@ -3,17 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>URL-SRT-Asist</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+
 </head>
 <style>
+
+.botones{
+    position: relative;
+    top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1500px;
+    height: 50px;
+    text-align: center;
+    align-content: center;
+
+}
+.label1{
+    font-size: 20px;
+    font-family: "Encode Sans Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: white;
+    position: relative;
+    margin: 20px;
+}
+
+.label2{
+    font-size: 26px;
+    font-family: "Encode Sans Condensed", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: white;
+    position: relative;
+    margin: 30px;
+}
+
+
 body{
+
     padding: 0%;
     margin: 0%;
     width: 100%;
     height: 100vh;
+    box-shadow: rgba(0, 0, 0, 0.85) inset 0px 100px 200px 100px;
+
+}
+
+.cuerpo2{
     align-content: center;
-    box-shadow: rgba(0, 0, 0, 0.85) inset 0px 50px 100px 30px;
+    position: relative;
+    top: 100px;
+    background-color: brown;
+    width: auto;
+    height: 20px;
 }
 
 input[type="text"] {
@@ -46,6 +101,7 @@ input[type="text"] {
     margin-right: auto;
     background-color: hwb(0 0% 100% / 0.5);
     text-align: center;
+    top: 170px;
     width: 420px;
     height: 450px;
     padding: 20px;
@@ -53,13 +109,13 @@ input[type="text"] {
     transform-origin: 50%;
 }
 
+
 .camboObligatorio{
     color: white;
     position: relative;
     top: 3px;
     left: 6px;
 }
-	
 .camboNOObligatorio{
     opacity: 0;
     color: white;
@@ -67,21 +123,18 @@ input[type="text"] {
     top: 3px;
     left: 6px;
 }
-	
 .logoMP{
     position: absolute;
     top: -10px;
     left: -70px;
     scale: 0.4;
 }
-
 .logoESPN{
     position: absolute;
     top: -15px;
     right: -70px;
     scale: 0.25;
 }
-	
 </style>
 <body id="cuerpo">
 
@@ -152,7 +205,10 @@ input[type="text"] {
 <path fill="#E52534" d="M330.039,33.025h-58.494h-6.911H115.375c3.208-27.122,7.373-30.868,40.127-30.868h141.756
 	C324.928,2.158,334.436,9.026,330.039,33.025"/>
 </svg>
-    <div id="cuerpo2">
+<div class="botones">
+    <label class="label2">R O M</label><label class="label1">Parámetros Satelitales</label><label class="label1">Parámetros Streaming</label><label class="label1">URL</label><label class="label1">Monitoreo Streaming</label><label class="label1">Transcode</label>
+</div>
+<div id="cuerpo2">
 
     <div id="ventana" class="ventana">
         <input type="text" id="mode" class="input" placeholder="mode"><label class="camboObligatorio">*</label><br>
