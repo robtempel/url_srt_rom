@@ -1,4 +1,12 @@
 
+
+
+
+
+
+
+
+
 let body = document.getElementById("cuerpo")
 body.addEventListener("keydown", (e) => {
     if(e.key === "Escape"){
@@ -8,7 +16,7 @@ body.addEventListener("keydown", (e) => {
 
 })
 let botonURL = document.getElementById("url")
-botonURL.addEventListener("click", () => {
+botonURL.addEventListener("mousedown", () => {
     let cuerpo2 = document.getElementById("cuerpo2")
     cuerpo2.innerHTML = `    <div id="ventana" class="ventanaURL">
         <input type="text" id="mode" class="input" placeholder="mode"><label class="camboObligatorio">*</label><br>
@@ -495,7 +503,7 @@ botonURL.addEventListener("click", () => {
 })
 
 let botonSatelital = document.getElementById("botonSat")
-botonSatelital.addEventListener("click", () => {
+botonSatelital.addEventListener("mousedown", () => {
     let cuerpo2 = document.getElementById("cuerpo2")
     cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
     <textarea class="inputSat" id="inputSat" placeholder="input_text"></textarea><br>
@@ -2734,11 +2742,69 @@ botonSatelital.addEventListener("click", () => {
     
 })
 
+let botonStreaming = document.getElementById("botonSTR")
+botonStreaming.addEventListener("mousedown", () => {
+
+    let cuerpo2 = document.getElementById("cuerpo2")
+    cuerpo2.innerHTML = `        <div id="ventana" class="ventanaSAT">
+            <textarea class="inputSat" id="inputSRT" placeholder="input_text">SRT - Hostname 190.104.223.26
+                Puerto: 30008</textarea><br>
+        </div>
+            
+        <div id="ventanaResumenSAT" class="ventanaSAT2">
+            <text id="resumenSat" class="resultadoSAT">Basic_Data</text>
+        </div>`
+
+    let inputparametrossrt = document.getElementById("inputSRT")
+    inputparametrossrt.addEventListener("keyup", () => {
+    
+        let carneSRT = inputparametrossrt.value
+
+        procesadorSRT(carneSRT)
+
+        function procesadorSRT(a){
+            let textoSinSaltos0 = a.replace(/\t/g, " ");
+            let textoSinSaltos = textoSinSaltos0.replace(/\n/g, " ");
+            var parametrosM = textoSinSaltos.toUpperCase()
+            var paramSplitPal = parametrosM.split(" ");  
+
+            for(palabra in paramSplitPal){
+                let diseccion = paramSplitPal[palabra].split(".")
+                if(diseccion.length == 4){
+                    let confirmacion2 = chequeo2(paramSplitPal[palabra])
+                    if(confirmacion2.length > 0){
+                        const numeroIP = [confirmacion2]
+                    }else{
+                        const numeroIP = [""]
+                    }
+                }
+            }
+
+            function chequeo2(a){
+                let octetos = a.split(".")
+                let posibleenumero1 = parseInt(octetos[0])
+                let posibleenumero2 = parseInt(octetos[1])
+                let posibleenumero3 = parseInt(octetos[2])
+                let posibleenumero4 = parseInt(octetos[3])
+                if(typeof posibleenumero1 == 'number' && typeof posibleenumero2 == 'number' && typeof posibleenumero3 == 'number' && typeof posibleenumero4 == 'number'){
+                    if(posibleenumero1 > -1 && posibleenumero1 < 257 && posibleenumero2 > -1 && posibleenumero2 < 257 && posibleenumero3 > -1 && posibleenumero3 < 257 && posibleenumero4 > -1 && posibleenumero4 < 257 ){
+                        return a
+                    }else{
+                        return ""
+                    }
+                }else{
+                    return ""
+                }
+            }
+        }
+
+    })
+
+})
+
 backGround()
 
 function backGround(){
-    let cuerpo = document.getElementById("cuerpo")
-    let urlactual = cuerpo.style.backgroundImage
     let ubicaciondeltxt = 'imagenes.txt'
     fetch(ubicaciondeltxt)
     .then(response => response.text())
