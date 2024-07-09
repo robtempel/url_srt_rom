@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 let body = document.getElementById("cuerpo")
 body.addEventListener("keydown", (e) => {
     if(e.key === "Escape"){
