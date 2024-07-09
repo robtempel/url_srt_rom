@@ -48,8 +48,6 @@ index.html
 .label1:hover {
     cursor: pointer;
     color: rgba(167, 167, 167, 0.884);
-
-
 }
 
 
@@ -93,21 +91,31 @@ input[type="text"] {
     margin: 2px;
 }
 
-.resultado{
+.resultadoSRT{
+
     position: relative;
     font-size: larger;
-    top: 9px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 6px;
-    border-style: none;
-    margin: 2px;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
-.ventana{
+.ventanaURL{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: hwb(0 0% 100% / 0.5);
+    text-align: center;
+    width: fit-content;
+    height: auto;
+    padding: 20px 40px;
+    border-radius: 13px;
+    transform-origin: 50%;
+    margin-bottom: 9px;
+}
+
+.ventanaSAT{
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -141,7 +149,7 @@ input[type="text"] {
     left: 45px;
     height: 50px;
     width: 200px;
-    top: 30px;
+    top: 10px;
 }
 
 .logoESPN{
@@ -149,7 +157,7 @@ input[type="text"] {
     right: 45px;
     height: 34px;
     width: 200px;
-    top: 35px;
+    top: 15px;
 }
 
 .headL{
@@ -165,15 +173,6 @@ input[type="text"] {
     width: 50%;
     height: 90px;
 }
-
-
-
-
-
-
-
-
-
 
 </style>
 <body id="cuerpo">
@@ -251,22 +250,28 @@ input[type="text"] {
     </svg>
 </div>
 <div class="cuerpo2" id="cuerpo2">
-       
+
+
 </div>
 
 <div class="botones">
-    <label class="label2">R O M</label><input type="button" class="label1" id="botonSat" value="Parámetros Satelitales"><input type="button" class="label1" value="Parámetros Streaming"><input type="button" class="label1" value="URL"><input type="button" class="label1" value="Monitoreo Streaming"><input type="button" class="label1" value="Transcode">
+    <label class="label2">R O M</label><input type="button" class="label1" id="botonSat" value="Parámetros Satelitales"><input type="button" class="label1" value="Parámetros Streaming"><input type="button" class="label1" value="URL" id="url"><input type="button" class="label1" value="Monitoreo Streaming"><input type="button" class="label1" value="Transcode">
 </div>
 
-
 <script>
-    console.log("acata")
 
-let botonSatelital = document.getElementById("botonSat")
-botonSatelital.addEventListener("click", () => {
-    console.log("funciona")
+let body = document.getElementById("cuerpo")
+body.addEventListener("keydown", (e) => {
+    if(e.key === "Escape"){
     let cuerpo2 = document.getElementById("cuerpo2")
-    cuerpo2.innerHTML = `    <div id="ventana" class="ventana">
+    cuerpo2.innerHTML = ``
+    }
+
+})
+let botonURL = document.getElementById("url")
+botonURL.addEventListener("click", () => {
+    let cuerpo2 = document.getElementById("cuerpo2")
+    cuerpo2.innerHTML = `    <div id="ventana" class="ventanaURL">
         <input type="text" id="mode" class="input" placeholder="mode"><label class="camboObligatorio">*</label><br>
         <input type="text" id="ipInput" placeholder="0.0.0.0"><label class="camboObligatorio">*</label><br>
         <input type="text" id="port" class="input" placeholder="number port"><label class="camboObligatorio">*</label><br>
@@ -289,8 +294,14 @@ botonSatelital.addEventListener("click", () => {
         <input type="text" id="payloadS" class="input" placeholder="Payload (Bytes utiles/pkt)"><label class="camboNOObligatorio">*</label><br>
         <input type="text" id="backLog" class="input" placeholder="backlog (#pkt)"><label class="camboNOObligatorio">*</label><br>
         <input type="text" id="streamID" class="input" placeholder="ID"><label class="camboNOObligatorio">*</label><br>
-        <text id="url" class="resultado"></text>
-    </div> `
+        </div>
+        <div id="ventanaResumenSRT" class="ventanaURL">
+            <text id="url" class="resultadoSRT">URL_Llamada_Protocolo_SRT_Scheme_PDP</text>
+        </div>
+            
+    
+    
+    `
 
     let mode = document.getElementById("mode")
     mode.addEventListener("keyup", (e) => {
@@ -337,8 +348,6 @@ botonSatelital.addEventListener("click", () => {
             }
         }
     })
-
-
 
     let passphrase = document.getElementById("passphrase")
     passphrase.addEventListener("keydown", (e) => {
@@ -625,9 +634,10 @@ botonSatelital.addEventListener("click", () => {
         }
         let scheme = `${fijo}${direccion}:${puerto}?${llamada}${latencia}${codigoconsolidado}${tipodetrasmision}${paketsize}${maximoBW}${minima}${maxima}${datosutiles}${datosenfila}${identifSTR}`
         if(mode != "" && ip != "" && port != "" && latency != ""){
-            url.innerText = scheme
+            url.textContent = scheme
         }
     }
+
     function validateIP(a){
         let partes = a.split(".")
         if(partes[0] > -1 && partes[0] < 256 && partes[1] > -1 && partes[1] < 256 && partes[2] > -1 && partes[2] < 256 && partes[3] > -1 && partes[3] < 256){
@@ -724,12 +734,22 @@ botonSatelital.addEventListener("click", () => {
 
 })
 
+let botonSatelital = document.getElementById("botonSat")
+botonSatelital.addEventListener("click", () => {
+    let cuerpo2 = document.getElementById("cuerpo2")
+    cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
+        <textarea class="inputSat" id="inputSat"></textarea><br>
+
+        <text id="resumenSat" class="resultadoSAT"></text>
+    </div>`
+})
+
 backGround()
 
 function backGround(){
     let cuerpo = document.getElementById("cuerpo")
     let urlactual = cuerpo.style.backgroundImage
-    let ubicaciondeltxt = 'imagenes.txt'
+    let ubicaciondeltxt = 'backgrounds.txt'
     fetch(ubicaciondeltxt)
     .then(response => response.text())
     .then(data => {
