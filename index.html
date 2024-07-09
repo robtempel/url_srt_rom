@@ -1,773 +1,94 @@
-index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>URL-SRT-Asist</title>
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 </head>
-<style>
 
-.botones{
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1000px;
-    height: 70px;
-    text-align: center;
-    align-content: center;
-}
-
-.label1{
-    font-size: 20px;
-    font-family: "Encode Sans Condensed", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    color: white;
-    position: relative;
-    margin: 5px;
-    padding: 0px 20px 0px 20px;
-    border-style: none;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0);
-    transition: color 0.3s ease; 
-
-}
-
-.label1:hover {
-    cursor: pointer;
-    color: rgba(167, 167, 167, 0.884);
-}
-
-
-
-
-.label2{
-    font-size: 26px;
-    font-family: "Encode Sans Condensed", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: rgb(255, 255, 255);
-    position: relative;
-    margin: 30px;
-
-}
-
-
-body{
-    padding: 0%;
-    margin: 0%;
-    width: 100%;
-    height: 100vh;
-    box-shadow: rgba(0, 0, 0, 0.85) inset 0px 100px 200px 100px;
-}
-
-.cuerpo2{
-    position: absolute;
-    top: 0;
-    align-content: center;
-    width: 100%;
-    height: 100vh;
-}
-
-input[type="text"] {
-    font-size: larger;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 6px;
-    border-style: none;
-    margin: 2px;
-}
-
-.resultadoSRT{
-
-    position: relative;
-    font-size: larger;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    border-radius: 6px;
-    color: rgb(255, 255, 255);
-}
-
-.ventanaURL{
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: hwb(0 0% 100% / 0.5);
-    text-align: center;
-    width: fit-content;
-    height: auto;
-    padding: 20px 40px;
-    border-radius: 13px;
-    transform-origin: 50%;
-    margin-bottom: 9px;
-}
-
-.ventanaSAT{
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: hwb(0 0% 100% / 0.5);
-    text-align: center;
-    width: 420px;
-    height: 450px;
-    padding: 20px;
-    border-radius: 13px;
-    transform-origin: 50%;
-}
-
-
-.camboObligatorio{
-    color: white;
-    position: relative;
-    top: 3px;
-    left: 6px;
-}
-
-.camboNOObligatorio{
-    opacity: 0;
-    color: rgb(255, 255, 255);
-    position: relative;
-    top: 3px;
-    left: 6px;
-}
-
-.logoMP{
-    position: absolute;
-    left: 45px;
-    height: 50px;
-    width: 200px;
-    top: 10px;
-}
-
-.logoESPN{
-    position: absolute;
-    right: 45px;
-    height: 34px;
-    width: 200px;
-    top: 15px;
-}
-
-.headL{
-    position: absolute;
-    left: 0;
-    width: 50%;
-    height: 90px;
-}
-
-.headR{
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 90px;
-}
-
-</style>
 <body id="cuerpo">
 
-
-<div class="headL">
-    <svg class="logoMP" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="470px" height="112px" viewBox="0 0 470 112" enable-background="new 0 0 470 112" xml:space="preserve">
-    <path fill="#DE3B21" d="M63.776,50.966L97.19,17.552c-1.626-2.809-3.654-5.447-5.905-7.699c-5.961-5.96-13.52-9.977-21.158-9.85
-        c-6.918,0.115-13.945,3.819-19.118,8.992L9.037,50.966c-5.849,5.849-9.584,13.089-8.973,20.92c0.528,6.744,4.574,14.101,9.83,19.355
-        c5.961,5.961,13.52,9.978,21.158,9.851c6.917-0.113,13.945-3.818,19.117-8.99l8.558-8.559c-2.17-3.748-3.622-7.801-3.924-11.657
-        C54.192,64.055,57.928,56.814,63.776,50.966z"/>
-    <path fill="#DE3B21" d="M118.972,50.966l33.124-33.124c-1.653-2.917-3.744-5.659-6.073-7.989c-5.96-5.96-13.519-9.977-21.157-9.85
-        c-6.919,0.115-13.945,3.819-19.118,8.992l-8.558,8.557c2.17,3.749,3.622,7.802,3.923,11.657c0.613,7.831-3.122,15.072-8.971,20.92
-        L58.729,83.542c1.626,2.81,3.654,5.447,5.906,7.698c5.961,5.961,13.519,9.978,21.158,9.851c6.917-0.114,13.944-3.819,19.117-8.991
-        l8.847-8.848c-2.077-3.666-3.463-7.611-3.757-11.367C109.388,64.055,113.124,56.814,118.972,50.966z"/>
-    <path opacity="0.51" fill="#757575" enable-background="new    " d="M101.113,29.208c-0.301-3.855-1.753-7.908-3.923-11.657
-        L63.776,50.966c-5.848,5.849-9.584,13.089-8.972,20.92c0.302,3.855,1.754,7.909,3.924,11.657l33.414-33.414
-        C97.99,44.281,101.726,37.04,101.113,29.208z"/>
-    <path fill="#FFFFFF" d="M101.113,29.208c-0.301-3.855-1.753-7.908-3.923-11.657L63.776,50.966
-        c-5.848,5.849-9.584,13.089-8.972,20.92c0.302,3.855,1.754,7.909,3.924,11.657l33.414-33.414
-        C97.99,44.281,101.726,37.04,101.113,29.208z"/>
-    <path fill="#DE3B21" d="M211.048,29.208c-0.527-6.744-4.573-14.099-9.83-19.355c-5.96-5.96-13.519-9.977-21.158-9.85
-        c-6.917,0.115-13.943,3.819-19.117,8.992l-8.848,8.847c2.077,3.667,3.463,7.611,3.757,11.367c0.612,7.831-3.123,15.072-8.971,20.92
-        l-33.124,33.124c1.653,2.917,3.744,5.66,6.073,7.988c5.961,5.961,13.519,9.978,21.157,9.851c6.917-0.113,13.944-3.818,19.117-8.99
-        l41.972-41.973C207.925,44.281,211.661,37.04,211.048,29.208z"/>
-    <path opacity="0.51" fill="#757575" enable-background="new    " d="M155.853,29.208c-0.293-3.755-1.68-7.7-3.757-11.367
-        l-33.124,33.124c-5.848,5.85-9.584,13.09-8.971,20.92c0.294,3.756,1.68,7.701,3.757,11.367l33.124-33.124
-        C152.729,44.281,156.465,37.04,155.853,29.208z"/>
-    <path fill="#FFFFFF" d="M155.853,29.208c-0.293-3.755-1.68-7.7-3.757-11.367l-33.124,33.124c-5.848,5.85-9.584,13.09-8.971,20.92
-        c0.294,3.756,1.68,7.701,3.757,11.367l33.124-33.124C152.729,44.281,156.465,37.04,155.853,29.208z"/>
-    <g enable-background="new    ">
-        <path fill="#FFFFFF" d="M226.765,36.288h7.006l7.767,12.493l7.766-12.493h7.006v29.544h-6.457V46.544l-8.314,12.619h-0.17
-            l-8.229-12.492v19.161h-6.373V36.288z"/>
-        <path fill="#FFFFFF" d="M263.399,36.288h22.285v5.782h-15.828v5.993h13.928v5.782h-13.928v6.204h16.039v5.782h-22.496V36.288z"/>
-        <path fill="#FFFFFF" d="M291.676,36.288h11.521c9.285,0,15.701,6.373,15.701,14.688v0.084c0,8.315-6.416,14.772-15.701,14.772
-            h-11.521V36.288z M303.198,59.966c5.318,0,8.906-3.588,8.906-8.821V51.06c0-5.233-3.588-8.905-8.906-8.905h-5.021v17.812H303.198z"
+    <div class="headL">
+        <svg class="logoMP" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="470px" height="112px" viewBox="0 0 470 112" enable-background="new 0 0 470 112" xml:space="preserve">
+        <path fill="#DE3B21" d="M63.776,50.966L97.19,17.552c-1.626-2.809-3.654-5.447-5.905-7.699c-5.961-5.96-13.52-9.977-21.158-9.85
+            c-6.918,0.115-13.945,3.819-19.118,8.992L9.037,50.966c-5.849,5.849-9.584,13.089-8.973,20.92c0.528,6.744,4.574,14.101,9.83,19.355
+            c5.961,5.961,13.52,9.978,21.158,9.851c6.917-0.113,13.945-3.818,19.117-8.99l8.558-8.559c-2.17-3.748-3.622-7.801-3.924-11.657
+            C54.192,64.055,57.928,56.814,63.776,50.966z"/>
+        <path fill="#DE3B21" d="M118.972,50.966l33.124-33.124c-1.653-2.917-3.744-5.659-6.073-7.989c-5.96-5.96-13.519-9.977-21.157-9.85
+            c-6.919,0.115-13.945,3.819-19.118,8.992l-8.558,8.557c2.17,3.749,3.622,7.802,3.923,11.657c0.613,7.831-3.122,15.072-8.971,20.92
+            L58.729,83.542c1.626,2.81,3.654,5.447,5.906,7.698c5.961,5.961,13.519,9.978,21.158,9.851c6.917-0.114,13.944-3.819,19.117-8.991
+            l8.847-8.848c-2.077-3.666-3.463-7.611-3.757-11.367C109.388,64.055,113.124,56.814,118.972,50.966z"/>
+        <path opacity="0.51" fill="#757575" enable-background="new    " d="M101.113,29.208c-0.301-3.855-1.753-7.908-3.923-11.657
+            L63.776,50.966c-5.848,5.849-9.584,13.089-8.972,20.92c0.302,3.855,1.754,7.909,3.924,11.657l33.414-33.414
+            C97.99,44.281,101.726,37.04,101.113,29.208z"/>
+        <path fill="#FFFFFF" d="M101.113,29.208c-0.301-3.855-1.753-7.908-3.923-11.657L63.776,50.966
+            c-5.848,5.849-9.584,13.089-8.972,20.92c0.302,3.855,1.754,7.909,3.924,11.657l33.414-33.414
+            C97.99,44.281,101.726,37.04,101.113,29.208z"/>
+        <path fill="#DE3B21" d="M211.048,29.208c-0.527-6.744-4.573-14.099-9.83-19.355c-5.96-5.96-13.519-9.977-21.158-9.85
+            c-6.917,0.115-13.943,3.819-19.117,8.992l-8.848,8.847c2.077,3.667,3.463,7.611,3.757,11.367c0.612,7.831-3.123,15.072-8.971,20.92
+            l-33.124,33.124c1.653,2.917,3.744,5.66,6.073,7.988c5.961,5.961,13.519,9.978,21.157,9.851c6.917-0.113,13.944-3.818,19.117-8.99
+            l41.972-41.973C207.925,44.281,211.661,37.04,211.048,29.208z"/>
+        <path opacity="0.51" fill="#757575" enable-background="new    " d="M155.853,29.208c-0.293-3.755-1.68-7.7-3.757-11.367
+            l-33.124,33.124c-5.848,5.85-9.584,13.09-8.971,20.92c0.294,3.756,1.68,7.701,3.757,11.367l33.124-33.124
+            C152.729,44.281,156.465,37.04,155.853,29.208z"/>
+        <path fill="#FFFFFF" d="M155.853,29.208c-0.293-3.755-1.68-7.7-3.757-11.367l-33.124,33.124c-5.848,5.85-9.584,13.09-8.971,20.92
+            c0.294,3.756,1.68,7.701,3.757,11.367l33.124-33.124C152.729,44.281,156.465,37.04,155.853,29.208z"/>
+        <g enable-background="new    ">
+            <path fill="#FFFFFF" d="M226.765,36.288h7.006l7.767,12.493l7.766-12.493h7.006v29.544h-6.457V46.544l-8.314,12.619h-0.17
+                l-8.229-12.492v19.161h-6.373V36.288z"/>
+            <path fill="#FFFFFF" d="M263.399,36.288h22.285v5.782h-15.828v5.993h13.928v5.782h-13.928v6.204h16.039v5.782h-22.496V36.288z"/>
+            <path fill="#FFFFFF" d="M291.676,36.288h11.521c9.285,0,15.701,6.373,15.701,14.688v0.084c0,8.315-6.416,14.772-15.701,14.772
+                h-11.521V36.288z M303.198,59.966c5.318,0,8.906-3.588,8.906-8.821V51.06c0-5.233-3.588-8.905-8.906-8.905h-5.021v17.812H303.198z"
+                />
+            <path fill="#FFFFFF" d="M324.975,36.288h6.5v29.544h-6.5V36.288z"/>
+            <path fill="#FFFFFF" d="M348.99,36.077h5.993l12.661,29.755h-6.795l-2.701-6.626h-12.492l-2.701,6.626h-6.627L348.99,36.077z
+                M355.828,53.466l-3.926-9.581l-3.926,9.581H355.828z"/>
+            <path fill="#FFFFFF" d="M372.202,36.288h12.071c7.048,0,11.311,4.179,11.311,10.214v0.084c0,6.838-5.318,10.383-11.944,10.383
+                h-4.938v8.863h-6.499V36.288z M383.852,51.187c3.249,0,5.148-1.941,5.148-4.474v-0.085c0-2.912-2.025-4.474-5.275-4.474h-5.023
+                v9.032H383.852z"/>
+            <path fill="#FFFFFF" d="M400.396,36.288h13.506c3.757,0,6.669,1.055,8.61,2.996c1.646,1.646,2.531,3.968,2.531,6.753v0.085
+                c0,4.77-2.574,7.766-6.33,9.158l7.217,10.552h-7.597l-6.331-9.454h-5.107v9.454h-6.499V36.288z M413.479,50.638
+                c3.166,0,4.98-1.688,4.98-4.178v-0.085c0-2.785-1.941-4.221-5.106-4.221h-6.458v8.483H413.479z"/>
+            <path fill="#FFFFFF" d="M429.601,51.145V51.06c0-8.398,6.626-15.278,15.743-15.278c9.116,0,15.658,6.795,15.658,15.194v0.084
+                c0,8.399-6.627,15.279-15.742,15.279C436.143,66.339,429.601,59.543,429.601,51.145z M454.207,51.145V51.06
+                c0-5.064-3.715-9.285-8.947-9.285c-5.234,0-8.863,4.137-8.863,9.201v0.084c0,5.065,3.713,9.286,8.947,9.286
+                C450.577,60.346,454.207,56.209,454.207,51.145z"/>
+        </g>
+        </svg>
+    </div>
+    <div class="headR">
+        <svg class="logoESPN" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="445.5px" height="113.5px" viewBox="0 0 445.5 113.5" enable-background="new 0 0 445.5 113.5" xml:space="preserve">
+        <g>
+        </g>
+        <g>
+            <polygon fill="#E52534" points="372.293,44.387 335.861,44.387 327.972,111.095 364.402,111.095 	"/>
+            <polygon fill="#E52534" points="441.102,44.387 404.672,44.387 396.781,111.095 433.212,111.095 	"/>
+            <path fill="#E52534" d="M329.99,33.025"/>
+        </g>
+        <path fill="#E52534" d="M442.445,33.025c1.753-18.471,2.867-31.234-32.779-30.868h-68.809l-3.651,30.868H442.445z"/>
+        <path fill="#E52534" d="M260.169,69.881h29.46c30.707,0,34.909-4.604,39.018-25.494H227.699l-7.891,66.708h35.485L260.169,69.881z"
             />
-        <path fill="#FFFFFF" d="M324.975,36.288h6.5v29.544h-6.5V36.288z"/>
-        <path fill="#FFFFFF" d="M348.99,36.077h5.993l12.661,29.755h-6.795l-2.701-6.626h-12.492l-2.701,6.626h-6.627L348.99,36.077z
-            M355.828,53.466l-3.926-9.581l-3.926,9.581H355.828z"/>
-        <path fill="#FFFFFF" d="M372.202,36.288h12.071c7.048,0,11.311,4.179,11.311,10.214v0.084c0,6.838-5.318,10.383-11.944,10.383
-            h-4.938v8.863h-6.499V36.288z M383.852,51.187c3.249,0,5.148-1.941,5.148-4.474v-0.085c0-2.912-2.025-4.474-5.275-4.474h-5.023
-            v9.032H383.852z"/>
-        <path fill="#FFFFFF" d="M400.396,36.288h13.506c3.757,0,6.669,1.055,8.61,2.996c1.646,1.646,2.531,3.968,2.531,6.753v0.085
-            c0,4.77-2.574,7.766-6.33,9.158l7.217,10.552h-7.597l-6.331-9.454h-5.107v9.454h-6.499V36.288z M413.479,50.638
-            c3.166,0,4.98-1.688,4.98-4.178v-0.085c0-2.785-1.941-4.221-5.106-4.221h-6.458v8.483H413.479z"/>
-        <path fill="#FFFFFF" d="M429.601,51.145V51.06c0-8.398,6.626-15.278,15.743-15.278c9.116,0,15.658,6.795,15.658,15.194v0.084
-            c0,8.399-6.627,15.279-15.742,15.279C436.143,66.339,429.601,59.543,429.601,51.145z M454.207,51.145V51.06
-            c0-5.064-3.715-9.285-8.947-9.285c-5.234,0-8.863,4.137-8.863,9.201v0.084c0,5.065,3.713,9.286,8.947,9.286
-            C450.577,60.346,454.207,56.209,454.207,51.145z"/>
-    </g>
-    </svg>
-</div>
-<div class="headR">
-    <svg class="logoESPN" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="445.5px" height="113.5px" viewBox="0 0 445.5 113.5" enable-background="new 0 0 445.5 113.5" xml:space="preserve">
-    <g>
-    </g>
-    <g>
-        <polygon fill="#E52534" points="372.293,44.387 335.861,44.387 327.972,111.095 364.402,111.095 	"/>
-        <polygon fill="#E52534" points="441.102,44.387 404.672,44.387 396.781,111.095 433.212,111.095 	"/>
-        <path fill="#E52534" d="M329.99,33.025"/>
-    </g>
-    <path fill="#E52534" d="M442.445,33.025c1.753-18.471,2.867-31.234-32.779-30.868h-68.809l-3.651,30.868H442.445z"/>
-    <path fill="#E52534" d="M260.169,69.881h29.46c30.707,0,34.909-4.604,39.018-25.494H227.699l-7.891,66.708h35.485L260.169,69.881z"
-        />
-    <path fill="#E52534" d="M181.849,69.881H134.05c-11.065,0-20.019-11.402-20.019-25.494h71.752c27.669,0,34.025,5.918,31.71,25.494
-        l-1.503,12.701c-4.107,20.89-8.309,28.513-39.016,28.513h-70.833l3.373-28.513h70.833L181.849,69.881z"/>
-    <polygon fill="#E52534" points="99.269,111.095 2.061,111.095 9.951,44.387 107.159,44.387 104.144,69.881 42.817,69.881 
-        41.314,82.582 102.641,82.582 "/>
-    <polygon fill="#E52534" points="108.502,33.025 112.154,2.158 14.946,2.158 11.294,33.025 "/>
-    <path fill="#E52534" d="M330.039,33.025h-58.494h-6.911H115.375c3.208-27.122,7.373-30.868,40.127-30.868h141.756
-        C324.928,2.158,334.436,9.026,330.039,33.025"/>
-    </svg>
-</div>
-<div class="cuerpo2" id="cuerpo2">
+        <path fill="#E52534" d="M181.849,69.881H134.05c-11.065,0-20.019-11.402-20.019-25.494h71.752c27.669,0,34.025,5.918,31.71,25.494
+            l-1.503,12.701c-4.107,20.89-8.309,28.513-39.016,28.513h-70.833l3.373-28.513h70.833L181.849,69.881z"/>
+        <polygon fill="#E52534" points="99.269,111.095 2.061,111.095 9.951,44.387 107.159,44.387 104.144,69.881 42.817,69.881 
+            41.314,82.582 102.641,82.582 "/>
+        <polygon fill="#E52534" points="108.502,33.025 112.154,2.158 14.946,2.158 11.294,33.025 "/>
+        <path fill="#E52534" d="M330.039,33.025h-58.494h-6.911H115.375c3.208-27.122,7.373-30.868,40.127-30.868h141.756
+            C324.928,2.158,334.436,9.026,330.039,33.025"/>
+        </svg>
+    </div>
 
+    <div class="cuerpo2" id="cuerpo2"></div>
 
-</div>
+    <div class="botones"><label class="label2">R O M</label><input type="button" class="label1" id="botonSat" value="Parámetros Satelitales"><input type="button" class="label1" value="Parámetros Streaming"><input type="button" class="label1" value="URL" id="url"><input type="button" class="label1" value="Monitoreo Streaming"><input type="button" class="label1" value="Transcode"></div>
 
-<div class="botones">
-    <label class="label2">R O M</label><input type="button" class="label1" id="botonSat" value="Parámetros Satelitales"><input type="button" class="label1" value="Parámetros Streaming"><input type="button" class="label1" value="URL" id="url"><input type="button" class="label1" value="Monitoreo Streaming"><input type="button" class="label1" value="Transcode">
-</div>
+    <script src="logic.js"></script>
 
-<script>
-
-let body = document.getElementById("cuerpo")
-body.addEventListener("keydown", (e) => {
-    if(e.key === "Escape"){
-    let cuerpo2 = document.getElementById("cuerpo2")
-    cuerpo2.innerHTML = ``
-    }
-
-})
-let botonURL = document.getElementById("url")
-botonURL.addEventListener("click", () => {
-    let cuerpo2 = document.getElementById("cuerpo2")
-    cuerpo2.innerHTML = `    <div id="ventana" class="ventanaURL">
-        <input type="text" id="mode" class="input" placeholder="mode"><label class="camboObligatorio">*</label><br>
-        <input type="text" id="ipInput" placeholder="0.0.0.0"><label class="camboObligatorio">*</label><br>
-        <input type="text" id="port" class="input" placeholder="number port"><label class="camboObligatorio">*</label><br>
-        <input type="text" id="passphrase" class="input" placeholder="passphrase"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="aes" class="input" placeholder="AES"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="latency" class="input" placeholder="latency (seconds)"><label class="camboObligatorio">*</label><br>
-        <input type="text" id="transtype" class="input" placeholder="transmission type" list="opciones3"><label class="camboNOObligatorio">*</label><br>
-            <datalist id="opciones3">
-                <option value="live">
-                <option value="file">
-                <option value="mux">
-                <option value="passthru">
-                <option value="reliable">
-                <option value="raw">
-            </datalist>
-        <input type="text" id="pkt_size" class="input" placeholder="bytes/pkt"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="maxbw" class="input" placeholder="max bw (Mbytes/s)"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="minversion" class="input" placeholder="min version compatible"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="maxversion" class="input" placeholder="max version compatible"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="payloadS" class="input" placeholder="Payload (Bytes utiles/pkt)"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="backLog" class="input" placeholder="backlog (#pkt)"><label class="camboNOObligatorio">*</label><br>
-        <input type="text" id="streamID" class="input" placeholder="ID"><label class="camboNOObligatorio">*</label><br>
-        </div>
-        <div id="ventanaResumenSRT" class="ventanaURL">
-            <text id="url" class="resultadoSRT">URL_Llamada_Protocolo_SRT_Scheme_PDP</text>
-        </div>
-            
-    
-    
-    `
-
-    let mode = document.getElementById("mode")
-    mode.addEventListener("keyup", (e) => {
-        if(e.key === "c"){
-            mode.value = "caller"
-            let ip = document.getElementById("ipInput")
-            ip.focus()
-            sintaxis()
-        }else{
-            if(e.key === "l"){
-                mode.value = "listener"
-                let ip = document.getElementById("ipInput")
-                ip.focus()
-                sintaxis()
-            }else{
-                mode.value = ""
-            }
-        }
-    })
-
-    let ip = document.getElementById("ipInput")
-    ip.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validateIP(ip.value)
-            if(sigo == "OK"){
-                let port = document.getElementById("port")
-                port.focus()
-                sintaxis()
-            }else{
-                ip.value = ""
-            }
-        }
-    })
-
-
-    let port = document.getElementById("port")
-    port.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorPort(port.value)
-            if(sigo == "OK"){
-                let passphrase = document.getElementById("passphrase")
-                passphrase.focus()
-                sintaxis()
-            }
-        }
-    })
-
-    let passphrase = document.getElementById("passphrase")
-    passphrase.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorPHRASE(passphrase.value)
-            if(sigo == "OK"){
-                let aes = document.getElementById("aes")
-                aes.focus()
-                sintaxis()
-            }
-            if(sigo == "OK2"){
-                let latency = document.getElementById("latency")
-                latency.focus()
-                sintaxis()
-            }
-        }
-    })
-
-
-    let aes = document.getElementById("aes")
-    aes.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorAES(aes.value)
-            if(sigo == "OK"){
-                let latency = document.getElementById("latency")
-                latency.focus()
-                sintaxis()
-            }
-            if(sigo == "NO"){
-                passphrase.value = ""
-                let latency = document.getElementById("latency")
-                latency.focus()
-                sintaxis()
-            }
-        }
-    })
-
-
-    let latency = document.getElementById("latency")
-    latency.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorLatencia(latency.value)
-            if(sigo == "OK"){
-                let transtype = document.getElementById("transtype")
-                transtype.focus()
-                sintaxis()
-            }else{
-                if(sigo == "NO"){
-                    latency.value =""
-                }
-            }
-        }
-    })
-
-    let transtype = document.getElementById("transtype")
-    transtype.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorTT(transtype.value)
-            if(sigo == "OK"){
-                let pkt_size = document.getElementById("pkt_size")
-                pkt_size.focus()
-                sintaxis()
-            }else{
-                if(sigo == "NO"){
-                    transtype.value = ""
-                    let pkt_size = document.getElementById("pkt_size")
-                    pkt_size.focus()
-                    sintaxis()
-                }
-            }
-        }
-    })
-
-
-    let pkt_size = document.getElementById("pkt_size")
-    pkt_size.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorPKTS(pkt_size.value)
-            if(sigo == "OK"){
-                let maxbw = document.getElementById("maxbw")
-                maxbw.focus()
-                sintaxis()
-            }else{
-                pkt_size.value = ""
-                let maxbw = document.getElementById("maxbw")
-                maxbw.focus()
-                sintaxis()
-            }
-        }
-    })
-
-    let maxbw = document.getElementById("maxbw")
-    maxbw.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorMBW(maxbw.value)
-            if(sigo == "OK"){
-                let minVC = document.getElementById("minversion")
-                minVC.focus()
-                sintaxis()
-            }else{
-                if(sigo == "NO"){
-                    maxbw.value = ""
-                    sintaxis()
-                }
-            }
-        }
-    })
-
-    let minVC = document.getElementById("minversion")
-    minVC.addEventListener("keydown",  (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorMinVer(minVC.value)
-            if(sigo == "OK"){
-                let maxVC = document.getElementById("maxversion")
-                maxVC.focus()
-                sintaxis()
-            }else{
-                if(sigo == "NO"){
-                    minVC.value = ""
-                }
-            }
-        }
-    })
-
-    let maxVC = document.getElementById("maxversion")
-    maxVC.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorMaxVer(maxVC.value)
-            if(sigo == "OK"){
-                let payloadS = document.getElementById("payloadS")
-                payloadS.focus()
-                sintaxis()
-            }else{
-                if(sigo == "NO"){
-                    maxVC.value = ""
-                }
-            }
-        }
-    })
-
-    let payloadS = document.getElementById("payloadS")
-    payloadS.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorPayload(payloadS.value)
-            if(sigo == "OK"){
-                let backLog = document.getElementById("backLog")
-                backLog.focus()
-                sintaxis()
-            }else{
-                if(sigo == "NO"){
-                    payloadS.value = ""
-                }
-            }
-        }
-    })
-
-    let backLog = document.getElementById("backLog")
-    backLog.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            let sigo = validadorBacklog(backLog.value)
-            if(sigo == "OK"){
-                let streamID = document.getElementById("streamID")
-                streamID.focus()
-                sintaxis()
-            }else{
-                backLog.value = ""
-            }
-        }
-    })
-
-    let streamID = document.getElementById("streamID")
-    streamID.addEventListener("keydown", (e) => {
-        if(e.key === 'Enter'){
-            sintaxis()
-        }
-    })
-
-    function sintaxis(){
-        let fijo = 'srt://'
-        let mode = document.getElementById("mode").value
-        let ip = document.getElementById("ipInput").value
-        let port = document.getElementById("port").value
-        let aes = document.getElementById("aes").value
-        let passphrase = document.getElementById("passphrase").value
-        let latency = document.getElementById("latency").value
-        let transmission = document.getElementById("transtype").value
-        let tamanopaquetes = document.getElementById("pkt_size").value
-        let maximoanchodebanda = document.getElementById("maxbw").value
-        let versionMinima = document.getElementById("minversion").value
-        let versionMaxima = document.getElementById("maxversion").value
-        let payloadsize = document.getElementById("payloadS").value
-        let fila = document.getElementById("backLog").value
-        let identificador = document.getElementById("streamID").value
-        let url = document.getElementById("url")
-        let llamada
-        if(mode.length == 0){
-            llamada = ""
-        }else{
-            llamada = `mode=${mode}`
-        }
-        let direccion
-        if(ip.length == 0){
-            direccion = ""
-        }else{
-            direccion = ip
-        }
-        let puerto
-        if(port.length == 0){
-            puerto = ""
-        }else{
-            puerto = port
-        }
-        let latencia
-        if(latency.length == 0){
-            latencia = "&latency=1000"
-        }else{
-            latencia = `&latency=${latency*1000}`
-        }
-        let codigo1
-        if(passphrase.length == 0){
-            codigo1 = ""
-        }else{
-            codigo1 = `passphrase=${passphrase}`
-        }
-        let codigo2
-        if(aes.length == 0){
-            codigo2 = ""
-        }else{
-            codigo2 = `pbkeylen=${aes/8}`
-        }
-        let codigoconsolidado
-        if(aes.length == 0 || passphrase.length == 0){
-            codigoconsolidado = ""
-        }else{
-            codigoconsolidado = `&${codigo2}&${codigo1}`
-        }
-        let tipodetrasmision
-        if(transmission.length == 0){
-            tipodetrasmision = ""
-        }else{
-            tipodetrasmision = `&transtype=${transmission}`
-        }
-        let paketsize
-        if(tamanopaquetes.length == 0){
-            paketsize = ""
-        }else{
-            paketsize = `&pkt_size=${tamanopaquetes}`
-        }
-        let maximoBW
-        if(maximoanchodebanda.length == 0){
-            maximoBW = ""
-        }else{
-            maximoBW = `&maxbw=${maximoanchodebanda*8000000}`
-        }
-        let minima
-        if(versionMinima.length == 0){
-            minima = ""
-        }else{
-            minima = `&minversion=${versionMinima}`
-        }
-        let maxima
-        if(versionMaxima.length == 0){
-            maxima = ""
-        }else{
-            maxima = `&maxversion=${versionMaxima}`
-        }
-        let datosutiles
-        if(payloadsize.length == 0){
-            datosutiles = ""
-        }else{
-            datosutiles = `&payloadsize=${payloadsize}`
-        }
-        let datosenfila
-        if(fila.length == 0){
-            datosenfila = ""
-        }else{
-            datosenfila = `&backlog=${fila}`
-        }
-        let identifSTR
-        if(identificador.length == 0){
-            identifSTR = ""
-        }else{
-            identifSTR = `&streamid=${identificador}`
-        }
-        let scheme = `${fijo}${direccion}:${puerto}?${llamada}${latencia}${codigoconsolidado}${tipodetrasmision}${paketsize}${maximoBW}${minima}${maxima}${datosutiles}${datosenfila}${identifSTR}`
-        if(mode != "" && ip != "" && port != "" && latency != ""){
-            url.textContent = scheme
-        }
-    }
-
-    function validateIP(a){
-        let partes = a.split(".")
-        if(partes[0] > -1 && partes[0] < 256 && partes[1] > -1 && partes[1] < 256 && partes[2] > -1 && partes[2] < 256 && partes[3] > -1 && partes[3] < 256){
-            return "OK"
-        }
-    }
-    function validadorPort(a){
-        let numeroobligado = parseInt(a)
-
-        if(numeroobligado > 0){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorPHRASE(a){
-        if(a.length > 0){
-            return "OK"
-        }else{
-            return "OK2"
-        }
-    }
-    function validadorAES(a){
-        if(a == "128" || a == "192" || a == "256"){
-            return "OK"
-        }
-        if(a == ""){
-            return "NO"
-        }
-    }
-    function validadorLatencia(a){
-        let numeroobligado = parseFloat(a)
-        if(numeroobligado > 0){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorTT(a){
-        if(a == "live" || a == "file" || a == "mux" || a == "passthru" || a == "reliable" || a == "raw" || a == ""){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorPKTS(a){
-        let numeroobligado = parseFloat(a)
-        if(numeroobligado > 49 && numeroobligado < 2000){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorMBW(a){
-        let numeroobligado = parseInt(a)
-        if(numeroobligado > 0){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorMinVer(a){
-        if(a == "1.0" || a == "1.1" || a == "1.2" || a == "1.3" || a == "1.4"){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorMaxVer(a){
-        if(a == "1.0" || a == "1.1" || a == "1.2" || a == "1.3" || a == "1.4"){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorPayload(a){
-        let numeroobligado = parseInt(a)
-        if(numeroobligado > 80 && numeroobligado < 1500){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-    function validadorBacklog(a){
-        let numeroobligado = parseInt(a)
-        if(numeroobligado > 0 && numeroobligado < 120){
-            return "OK"
-        }else{
-            return "NO"
-        }
-    }
-
-    mode.focus()
-
-})
-
-let botonSatelital = document.getElementById("botonSat")
-botonSatelital.addEventListener("click", () => {
-    let cuerpo2 = document.getElementById("cuerpo2")
-    cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
-        <textarea class="inputSat" id="inputSat"></textarea><br>
-
-        <text id="resumenSat" class="resultadoSAT"></text>
-    </div>`
-})
-
-backGround()
-
-function backGround(){
-    let cuerpo = document.getElementById("cuerpo")
-    let urlactual = cuerpo.style.backgroundImage
-    let ubicaciondeltxt = 'imagenes.txt'
-    fetch(ubicaciondeltxt)
-    .then(response => response.text())
-    .then(data => {
-
-        let temp = data.split('	-----')
-        temp.sort()
-        const randomIndex = Math.floor(Math.random()*1000);
-        const randomImage = temp[randomIndex % temp.length];
-        document.body.style.backgroundImage = `url(${randomImage})`;
-        console.log(randomImage)
-    })
-
-}
-
-
-
-
-
-</script>
 </body>
 </html>
