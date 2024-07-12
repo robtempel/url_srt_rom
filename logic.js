@@ -3266,7 +3266,7 @@ let monitoreostreaming = document.getElementById("monitoreostreaming")
 monitoreostreaming.addEventListener("click", () => {
     let cuerpo2 = document.getElementById("cuerpo2")
     cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
-    <text class="resultadoSAT">EN CONSTRUCCION</text><br>
+    <text class="resultadoSAT">MONIOREO DE CALIDAD DEL FLUJO DE DATOS SRT/UDP/RTP - LINEA DE COMANDOS (EN CONSTRUCCION)</text><br>
     </div>
     
     <div id="ventanaResumenSAT" class="ventanaSAT2">
@@ -3281,7 +3281,7 @@ let transcode = document.getElementById("transcode")
 transcode.addEventListener("click", () => {
     let cuerpo2 = document.getElementById("cuerpo2")
     cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
-    <text class="resultadoSAT">EN CONSTRUCCION</text><br>
+    <text class="resultadoSAT">TRANCODIFICACION TRANSPORT STREAM - LINEA DE COMANDOS (EN CONSTRUCCION)</text><br>
     </div>
     
     <div id="ventanaResumenSAT" class="ventanaSAT2">
