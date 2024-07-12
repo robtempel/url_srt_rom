@@ -2780,7 +2780,11 @@ botonStreaming.addEventListener("mousedown", () => {
         if(resultadoSRT.includes("undefined")){
             urlChain = "Incomplete Data"
         }else{
-            urlChain = sintaxisCHAIN()
+            if(resultadoSRT.includes("Listener")){
+                urlChain = "Enlace modo listener"
+            }else{
+                urlChain = sintaxisCHAIN()
+            }
         }
 
         textoresumenSRT.textContent = resultadoSRT
