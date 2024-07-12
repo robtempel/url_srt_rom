@@ -3191,7 +3191,7 @@ botonStreaming.addEventListener("mousedown", () => {
             let fijo = 'srt://'
             let mode = llamadaModo[0]
             let ip = numeroIP[0]
-            let port = puerto[0]
+            let port
             let aes
             if(aesOK.length == 0){
                 aes = ""
@@ -3218,10 +3218,10 @@ botonStreaming.addEventListener("mousedown", () => {
                 direccion = ip
             }
             let puertO
-            if(port.length == 0){
+            if(puerto.length == 0){
                 puertO = ""
             }else{
-                puertO = port
+                puertO = puerto[0]
             }
             let latencia
             if(latency.length == 0){
@@ -3254,6 +3254,8 @@ botonStreaming.addEventListener("mousedown", () => {
         }
 
     })
+
+    inputparametrossrt.focus()
 
 })
 
