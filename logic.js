@@ -1,3 +1,18 @@
+const paginaActiva = []
+const numeroIP = []
+const puerto = []
+const passphraseSRT = []
+const aesSRT = []
+const acumulacionPosiblesPuertos = []
+const posiblesPASS = []
+const posibleAES = []
+const contador = []
+const contador2 = []
+const llamadaModo = []
+const regex = /^[a-zA-Z0-9]+$/;
+const passPhraseOK = [""]
+const aesOK = [""]
+
 let body = document.getElementById("cuerpo")
 body.addEventListener("keydown", (e) => {
     if(e.key === "Escape"){
@@ -497,7 +512,7 @@ let botonSatelital = document.getElementById("botonSat")
 botonSatelital.addEventListener("mousedown", () => {
     let cuerpo2 = document.getElementById("cuerpo2")
     cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
-    <textarea class="inputSat" id="inputSat" placeholder="input_text"></textarea><br>
+    <textarea class="inputSat" id="inputSat" placeholder="Satellite / Frecuency / Symbol Rate / Encriptation / Service / Modulation"></textarea><br>
     </div>
     
     <div id="ventanaResumenSAT" class="ventanaSAT2">
@@ -522,7 +537,7 @@ botonSatelital.addEventListener("mousedown", () => {
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-          }
+        }
         
     })
 
@@ -2738,40 +2753,269 @@ botonStreaming.addEventListener("mousedown", () => {
 
     let cuerpo2 = document.getElementById("cuerpo2")
     cuerpo2.innerHTML = `        <div id="ventana" class="ventanaSAT">
-            <textarea class="inputSat" id="inputSRT" placeholder="input_text">SRT - Hostname 190.104.223.26
-                Puerto: 30008</textarea><br>
+            <textarea class="inputSat" id="inputSRT" placeholder="IP Addres / Port / Passphrase / AES"></textarea><br>
         </div>
             
         <div id="ventanaResumenSAT" class="ventanaSAT2">
-            <text id="resumenSat" class="resultadoSAT">Basic_Data</text>
-        </div>`
+            <text id="resumenSRT" class="resultadoSAT">Detalles Lista de grabaciones</text><br>
+        </div>
+        <div id="ventanaResumenSAT" class="ventanaSAT2">
+            <text id="urlCHAIN" class="resultadoSAT">URL para hacer llamada por VLC</text>
+        </div>
+        
+        
+        
+        `
 
     let inputparametrossrt = document.getElementById("inputSRT")
     inputparametrossrt.addEventListener("keyup", () => {
     
         let carneSRT = inputparametrossrt.value
 
-        procesadorSRT(carneSRT)
+        let resultadoSRT = procesadorSRT(carneSRT)
+        let urlChain
+        let textoresumenSRT = document.getElementById("resumenSRT")
+        let urlCHAIN = document.getElementById("urlCHAIN")
+        
+        if(resultadoSRT.includes("undefined")){
+            urlChain = "Incomplete Data"
+        }else{
+            urlChain = sintaxisCHAIN()
+        }
+
+        textoresumenSRT.textContent = resultadoSRT
+        urlCHAIN.textContent = urlChain
+
 
         function procesadorSRT(a){
-            let textoSinSaltos0 = a.replace(/\t/g, " ");
-            let textoSinSaltos = textoSinSaltos0.replace(/\n/g, " ");
-            var parametrosM = textoSinSaltos.toUpperCase()
-            var paramSplitPal = parametrosM.split(" ");  
 
-            for(palabra in paramSplitPal){
+            let listener = checkModoListener(a)
+            
+            llamadaModo.splice(0, llamadaModo.length)
+
+            if(listener.length > 0){
+                llamadaModo.push("Listener")
+                return `modo Listener: Puerto ${listener}`
+              }else{
+                llamadaModo.push("Caller")
+                return `modo Caller: ${seguirbuscando(a)}`
+            }
+      
+            function checkModoListener(b){
+              if(b.includes("181.30.122.85") || b.includes("190.220.6.53") || b.includes("operacionesarg.mediapro.tv")){
+      
+                if(b.includes("11011") ||  b.includes("11012") ||  b.includes("11013") ||  b.includes("11014") ||  b.includes("11021") ||  b.includes("11022") ||  b.includes("11023") ||  b.includes("11024") ||  b.includes("11031") ||  b.includes("11032") ||  b.includes("11033") ||  b.includes("11034") ||  b.includes("11041") ||  b.includes("11042") ||  b.includes("11043") ||  b.includes("11044") ||  b.includes("11051") ||  b.includes("11052") ||  b.includes("11053") ||  b.includes("11054") ||  b.includes("11061") ||  b.includes("11062") ||  b.includes("11063") ||  b.includes("11064") ||  b.includes("11071") ||  b.includes("11072") ||  b.includes("11073") ||  b.includes("11074") ||  b.includes("11081") ||  b.includes("11082") ||  b.includes("11083") ||  b.includes("11084") ||  b.includes("11091") ||  b.includes("11101") ||  b.includes("11111") ||  b.includes("11121") ||  b.includes("11131") ||  b.includes("11141") ||  b.includes("12011") ||   b.includes("12012") ||   b.includes("12013") ||   b.includes("12014") ||   b.includes("12021") ||   b.includes("12022") ||   b.includes("12023") ||   b.includes("12024") ||   b.includes("12031") ||    b.includes("12032") ||    b.includes("12033") ||    b.includes("12034") ||   b.includes("12041") ||    b.includes("12042") ||    b.includes("12043") ||    b.includes("12044")){
+      
+                  switch (true) {
+                    case b.includes("11011"):
+                      return "11011 IRD 01 streaming 1"
+                      break;
+                    case b.includes("11012"):
+                      return "11012 IRD 01 streaming 2"
+                      break;
+                    case b.includes("11013"):
+                      return "11013 IRD 01 streaming 3"
+                      break;
+                    case b.includes("11014"):
+                      return "11014"
+                      break;
+                    case b.includes("11021"):
+                      return "11021 IRD 02 streaming 1"
+                      break;
+                    case b.includes("11022"):
+                      return "11022 IRD 02 streaming 2"
+                      break;
+                    case b.includes("11023"):
+                      return "11023 IRD 02 streaming 3"
+                      break;
+                    case b.includes("11024"):
+                      return "11024"
+                      break;
+                    case b.includes("11031"):
+                      return "11031 IRD 03 streaming 1"
+                      break;
+                    case b.includes("11032"):
+                      return "11032 IRD 03 streaming 2"
+                      break;
+                    case b.includes("11033"):
+                      return "11033 IRD 03 streaming 3"
+                      break;
+                    case b.includes("11034"):
+                      return "11034"
+                      break;
+                    case b.includes("11041"):
+                      return "11041 IRD 04 streaming 1"
+                      break;
+                    case b.includes("11042"):
+                      return "11042 IRD 04 streaming 2"
+                      break;
+                    case b.includes("11043"):
+                      return "11043 IRD 04 streaming 3"
+                      break;
+                    case b.includes("11044"):
+                      return "11044"
+                      break;
+                    case b.includes("11051"):
+                      return "11051 IRD 05 streaming 1"
+                      break;
+                    case b.includes("11052"):
+                      return "11052 IRD 05 streaming 2"
+                      break;
+                    case b.includes("11053"):
+                      return "11053 IRD 05 streaming 3"
+                      break;
+                    case b.includes("11054"):
+                      return "11054"
+                      break;
+                    case b.includes("11061"):
+                      return "11061 IRD 06 streaming 1"
+                      break;
+                    case b.includes("11062"):
+                      return "11062 IRD 06 streaming 2"
+                      break;
+                    case b.includes("11063"):
+                      return "11063 IRD 06 streaming 3"
+                      break;
+                    case b.includes("11064"):
+                      return "11064"
+                      break;
+                    case b.includes("11071"):
+                      return "11071 IRD 07 streaming 1"
+                      break;
+                    case b.includes("11072"):
+                      return "11072 IRD 07 streaming 2"
+                      break;
+                    case b.includes("11073"):
+                      return "11073 IRD 07 streaming 3"
+                      break;
+                    case b.includes("11074"):
+                      return "11074"
+                      break;
+                    case b.includes("11081"):
+                      return "11081 IRD 08 streaming 1"
+                      break;
+                    case b.includes("11082"):
+                      return "11082 IRD 08 streaming 2"
+                      break;
+                    case b.includes("11083"):
+                      return "11083 IRD 08 streaming 3"
+                      break;
+                    case b.includes("11084"):
+                      return "11084"
+                      break;
+                    case b.includes("11091"):
+                      return "11091 IRD 09"
+                      break;
+                    case b.includes("11101"):
+                      return "11101 IRD 10"
+                      break;
+                    case b.includes("11111"):
+                      return "11111 IRD 11"
+                      break;
+                    case b.includes("11121"):
+                      return "11121 IRD 12"
+                      break;
+                    case b.includes("11131"):
+                      return "11131"
+                      break;
+                    case b.includes("11141"):
+                      return "11141 IRD 14"
+                      break;
+                    case b.includes("12011"):
+                      return "12011 SRT 1.1"
+                      break;
+                    case b.includes("12012"):
+                      return "12011 SRT 1.2"
+                      break;
+                    case b.includes("12013"):
+                      return "12011 SRT 1.3"
+                      break;
+                    case b.includes("12014"):
+                      return "12011 SRT 1.4"
+                      break;
+                    case b.includes("12021"):
+                      return "12021 SRT 2.1"
+                      break;
+                    case b.includes("12022"):
+                      return "12021 SRT 2.2"
+                      break;
+                    case b.includes("12023"):
+                      return "12021 SRT 2.3"
+                      break;
+                    case b.includes("12024"):
+                      return "12021 SRT 2.4"
+                      break;
+                    case b.includes("12031"):
+                      return "12031 SRT 3.1"
+                      break;
+                    case b.includes("12032"):
+                      return "12031 SRT 3.2"
+                      break;
+                    case b.includes("12033"):
+                      return "12031 SRT 3.3"
+                      break;
+                    case b.includes("12034"):
+                      return "12031 SRT 3.4"
+                      break;
+                    case b.includes("12041"):
+                      return "12041 SRT 4.1"
+                      break;
+                    case b.includes("12042"):
+                      return "12041 SRT 4.2"
+                      break;
+                    case b.includes("12043"):
+                      return "12041 SRT 4.3"
+                      break;
+                    case b.includes("12044"):
+                      return "12041 SRT 4.4"
+                      break;
+                    default:
+                      return ""
+                      break
+                  }
+      
+                }
+      
+              }else{
+                return ""
+              }
+      
+            }
+      
+            function seguirbuscando(c){
+      
+              numeroIP.splice(0, numeroIP.length)
+              puerto.splice(0, puerto.length)
+              passphraseSRT.splice(0, passphraseSRT.length)
+              posibleAES.splice(0, posibleAES.length)
+      
+              let textoSinSaltos0 = c.replace(/\t/g, " ");
+              let textoSinSaltos = textoSinSaltos0.replace(/\n/g, " ");
+              var parametrosM = textoSinSaltos.toUpperCase()
+              var paramSplitPal = parametrosM.split(" ");  
+              let paramPal = textoSinSaltos.split(" ")
+      
+
+      
+              /////////// buscar IP y puerto
+              for(palabra in paramSplitPal){
                 let diseccion = paramSplitPal[palabra].split(".")
                 if(diseccion.length == 4){
-                    let confirmacion2 = chequeo2(paramSplitPal[palabra])
-                    if(confirmacion2.length > 0){
-                        const numeroIP = [confirmacion2]
-                    }else{
-                        const numeroIP = [""]
+                  let confirmacion2 = chequeo2(paramSplitPal[palabra])
+                  if(confirmacion2.length > 0){
+                      numeroIP[0] = confirmacion2
+                  }
+                  if(paramSplitPal[palabra].includes(":")){
+                    let palabraDividida = paramSplitPal[palabra].split(":")
+                    let posiblepuerto = parseInt(palabraDividida[1])
+                    if(typeof posiblepuerto == 'number' && posiblepuerto > 0){
+                      puerto[0] = posiblepuerto
                     }
+                  }
                 }
-            }
-
-            function chequeo2(a){
+              }
+      
+              function chequeo2(a){
                 let octetos = a.split(".")
                 let posibleenumero1 = parseInt(octetos[0])
                 let posibleenumero2 = parseInt(octetos[1])
@@ -2779,14 +3023,229 @@ botonStreaming.addEventListener("mousedown", () => {
                 let posibleenumero4 = parseInt(octetos[3])
                 if(typeof posibleenumero1 == 'number' && typeof posibleenumero2 == 'number' && typeof posibleenumero3 == 'number' && typeof posibleenumero4 == 'number'){
                     if(posibleenumero1 > -1 && posibleenumero1 < 257 && posibleenumero2 > -1 && posibleenumero2 < 257 && posibleenumero3 > -1 && posibleenumero3 < 257 && posibleenumero4 > -1 && posibleenumero4 < 257 ){
-                        return a
+                        return `${posibleenumero1}.${posibleenumero2}.${posibleenumero3}.${posibleenumero4}`
                     }else{
                         return ""
                     }
                 }else{
                     return ""
                 }
+              }
+      
+              passPhraseOK.splice(0, passPhraseOK.length)
+              aesOK.splice(0, aesOK.length)
+      
+              
+              if(parametrosM.includes("PASS")){
+                contador.splice(0, contador.length)
+                for(palabra in paramSplitPal){
+                  if(paramSplitPal[palabra].includes("PASS")){
+                    contador.push(parseInt(palabra))
+                  }
+                }
+      
+                posiblesPASS.splice(0, posiblesPASS.length)
+      
+                for(let i = contador[0] + 1; i < paramSplitPal.length; i++){
+                  if(paramSplitPal[i].length > 1){
+                    posiblesPASS.push(paramPal[i])
+                  }
+                }
+      
+                if(posiblesPASS.length > 0){
+                  let passletraxletra = posiblesPASS[0].split("")
+                  for(let i = passletraxletra.length -1; i > -1; i--){
+                    switch (regex.test(passletraxletra[i])){
+                      case false:
+                        passletraxletra.splice(i, 1)
+                        break
+                      default:
+                        break
+                    }
+                  }
+                  passPhraseOK.splice(0, passPhraseOK.length)
+                  passPhraseOK.push(passletraxletra.join(""))
+                }
+              }
+      
+              if(parametrosM.includes("AES")){
+      
+                contador2.splice(0, contador2.length)
+                aesOK.splice(0, aesOK.length)
+      
+                for(palabra in paramSplitPal){
+                  if(paramSplitPal[palabra].includes("AES")){
+                    contador2.push(palabra)
+                    switch (true){
+                      case paramSplitPal[palabra].includes("128"):
+                        aesOK.push("128")
+                        break
+                      case paramSplitPal[parseInt(palabra) + 1].includes("128"):
+                        aesOK.push("128")
+                        break
+                      case paramSplitPal[palabra].includes("192"):
+                        aesOK.push("192")
+                        break
+                      case paramSplitPal[parseInt(palabra) + 1].includes("192"):
+                        aesOK.push("192")
+                        break
+                      case paramSplitPal[palabra].includes("256"):
+                        aesOK.push("256")
+                      case paramSplitPal[parseInt(palabra) + 1].includes("256"):
+                        aesOK.push("256")
+                        break
+                      default:
+                        break;
+                    }
+                  }
+                }
+              }
+      
+              let encripcion1 = ""
+              let encripcion2 = ""
+              let encripcion3 = ""
+      
+              if(passPhraseOK.length == 0){
+                encripcion1 = ""
+              }else{
+                if(passPhraseOK[0] != ""){
+                  encripcion1 = passPhraseOK[0]
+                }else{
+                  encripcion1 = ""
+                }
+              }
+      
+              if(aesOK.length == 0){
+                encripcion2 = ""
+              }else{
+                if(aesOK[0] != ""){
+                  encripcion2 = aesOK[0]
+                }else{
+                  encripcion2 = ""
+                }
+              }
+      
+      
+      
+              if(encripcion1 == "" && encripcion2 == ""){
+                encripcion3 = ""
+              }
+      
+              if(encripcion1 != "" && encripcion2 == ""){
+                encripcion3 = ` Key: '${encripcion1}' AES: undefined`
+              }
+      
+              if(encripcion1 == "" && encripcion2 != ""){
+                encripcion3 = ` Key: undefined AES${encripcion2}`
+              }
+      
+              if(encripcion1 != "" && encripcion2 != ""){
+                encripcion3 = ` Key: '${encripcion1}' AES${encripcion2}`
+              }
+      
+              if(numeroIP.length > 0 && puerto.length == 0){
+                let puertoRequerido = buscarPuerto(paramSplitPal, numeroIP)
+                return `${numeroIP}:${puertoRequerido}${encripcion3}`
+              }
+      
+              if(numeroIP.length == 0 && puerto.length > 0){
+                return `${puerto}${encripcion3}`
+              }
+      
+              if(numeroIP.length == 0 && puerto.length == 0){
+                return ""
+              }
+      
+              if(numeroIP.length > 0 && puerto.length > 0){
+                return `${numeroIP}:${puerto}${encripcion3}`
+              }
+      
+              function buscarPuerto(d, e){
+                acumulacionPosiblesPuertos.splice(0, acumulacionPosiblesPuertos.length)
+                for(palabra in d){
+                  if(d[palabra].includes(e)){
+                    d.splice(0, parseInt(palabra) +1)
+                    for(linea in d){
+                      if(parseInt(d[linea]) > 0){
+      
+                        acumulacionPosiblesPuertos.push(d[linea])
+      
+                      }
+                    }
+                  }
+                }
+      
+                return acumulacionPosiblesPuertos[0]
+              
+              }
             }
+        }
+
+        function sintaxisCHAIN(){
+            let fijo = 'srt://'
+            let mode = llamadaModo[0]
+            let ip = numeroIP[0]
+            let port = puerto[0]
+            let aes
+            if(aesOK.length == 0){
+                aes = ""
+            }else{
+                aes = aesOK[0]
+            }
+            let passphrase
+            if(passPhraseOK.length == 0){
+                passphrase = ""
+            }else{
+                passphrase = passPhraseOK[0]
+            }
+            let latency = 1
+            console.log(aes)
+            let llamada
+            if(mode.length == 0){
+                llamada = ""
+            }else{
+                llamada = `mode=${mode}`
+            }
+            let direccion
+            if(ip.length == 0){
+                direccion = ""
+            }else{
+                direccion = ip
+            }
+            let puertO
+            if(port.length == 0){
+                puertO = ""
+            }else{
+                puertO = port
+            }
+            let latencia
+            if(latency.length == 0){
+                latencia = "&latency=1000"
+            }else{
+                latencia = `&latency=${latency*1000}`
+            }
+            let codigo1
+            if(passphrase.length == 0){
+                codigo1 = ""
+            }else{
+                codigo1 = `passphrase=${passphrase}`
+            }
+            let codigo2
+            if(aes.length == 0){
+                codigo2 = ""
+            }else{
+                codigo2 = `pbkeylen=${aes/8}`
+            }
+            let codigoconsolidado
+            if(aes.length == 0 || passphrase.length == 0){
+                codigoconsolidado = ""
+            }else{
+                codigoconsolidado = `&${codigo2}&${codigo1}`
+            }
+            
+
+            return `${fijo}${direccion}:${puertO}?${llamada}${latencia}${codigoconsolidado}`
+
         }
 
     })
