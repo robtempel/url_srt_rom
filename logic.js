@@ -3262,6 +3262,35 @@ botonStreaming.addEventListener("mousedown", () => {
 
 })
 
+let monitoreostreaming = document.getElementById("monitoreostreaming")
+monitoreostreaming.addEventListener("click", () => {
+    let cuerpo2 = document.getElementById("cuerpo2")
+    cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
+    <text class="resultadoSAT">EN CONSTRUCCION</text><br>
+    </div>
+    
+    <div id="ventanaResumenSAT" class="ventanaSAT2">
+        <text id="resumenSat" class="resultadoSAT"></text>
+    </div>
+
+    `
+})
+
+
+let transcode = document.getElementById("transcode")
+transcode.addEventListener("click", () => {
+    let cuerpo2 = document.getElementById("cuerpo2")
+    cuerpo2.innerHTML = `<div id="ventana" class="ventanaSAT">
+    <text class="resultadoSAT">EN CONSTRUCCION</text><br>
+    </div>
+    
+    <div id="ventanaResumenSAT" class="ventanaSAT2">
+        <text id="resumenSat" class="resultadoSAT"></text>
+    </div>
+
+    `
+})
+
 backGround()
 
 function backGround(){
