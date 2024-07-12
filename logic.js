@@ -2992,6 +2992,7 @@ botonStreaming.addEventListener("mousedown", () => {
       
               numeroIP.splice(0, numeroIP.length)
               puerto.splice(0, puerto.length)
+
               passphraseSRT.splice(0, passphraseSRT.length)
               posibleAES.splice(0, posibleAES.length)
       
@@ -3009,13 +3010,13 @@ botonStreaming.addEventListener("mousedown", () => {
                 if(diseccion.length == 4){
                   let confirmacion2 = chequeo2(paramSplitPal[palabra])
                   if(confirmacion2.length > 0){
-                      numeroIP[0] = confirmacion2
+                      numeroIP.push(confirmacion2)
                   }
                   if(paramSplitPal[palabra].includes(":")){
                     let palabraDividida = paramSplitPal[palabra].split(":")
                     let posiblepuerto = parseInt(palabraDividida[1])
                     if(typeof posiblepuerto == 'number' && posiblepuerto > 0){
-                      puerto[0] = posiblepuerto
+                      puerto.push(posiblepuerto)
                     }
                   }
                 }
@@ -3151,6 +3152,8 @@ botonStreaming.addEventListener("mousedown", () => {
       
               if(numeroIP.length > 0 && puerto.length == 0){
                 let puertoRequerido = buscarPuerto(paramSplitPal, numeroIP)
+                puerto.push(puertoRequerido)
+
                 return `${numeroIP}:${puertoRequerido}${encripcion3}`
               }
       
@@ -3161,8 +3164,9 @@ botonStreaming.addEventListener("mousedown", () => {
               if(numeroIP.length == 0 && puerto.length == 0){
                 return ""
               }
-      
+
               if(numeroIP.length > 0 && puerto.length > 0){
+
                 return `${numeroIP}:${puerto}${encripcion3}`
               }
       
@@ -3173,14 +3177,13 @@ botonStreaming.addEventListener("mousedown", () => {
                     d.splice(0, parseInt(palabra) +1)
                     for(linea in d){
                       if(parseInt(d[linea]) > 0){
-      
                         acumulacionPosiblesPuertos.push(d[linea])
       
                       }
                     }
                   }
                 }
-                console.log(acumulacionPosiblesPuertos)
+
                 return acumulacionPosiblesPuertos[0]
               
               }
@@ -3191,7 +3194,6 @@ botonStreaming.addEventListener("mousedown", () => {
             let fijo = 'srt://'
             let mode = llamadaModo[0]
             let ip = numeroIP[0]
-            let port
             let aes
             if(aesOK.length == 0){
                 aes = ""
@@ -3212,12 +3214,13 @@ botonStreaming.addEventListener("mousedown", () => {
                 llamada = `mode=${mode}`
             }
             let direccion
-            if(ip.length == 0){
+            if(numeroIP.length == 0){
                 direccion = ""
             }else{
-                direccion = ip
+                direccion = numeroIP[0]
             }
             let puertO
+/// aca esta la cosa
             if(puerto.length == 0){
                 puertO = ""
             }else{
@@ -3236,10 +3239,10 @@ botonStreaming.addEventListener("mousedown", () => {
                 codigo1 = `passphrase=${passphrase}`
             }
             let codigo2
-            if(aes.length == 0){
+            if(aesOK.length == 0){
                 codigo2 = ""
             }else{
-                codigo2 = `pbkeylen=${aes/8}`
+                codigo2 = `pbkeylen=${aesOK[0]/8}`
             }
             let codigoconsolidado
             if(aes.length == 0 || passphrase.length == 0){
