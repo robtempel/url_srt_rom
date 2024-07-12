@@ -2795,6 +2795,8 @@ botonStreaming.addEventListener("mousedown", () => {
 
             if(listener.length > 0){
                 llamadaModo.push("Listener")
+                numeroIP.push("")
+                puerto.push(listener)
                 return `modo Listener: Puerto ${listener}`
               }else{
                 llamadaModo.push("Caller")
@@ -3174,7 +3176,7 @@ botonStreaming.addEventListener("mousedown", () => {
                     }
                   }
                 }
-      
+                console.log(acumulacionPosiblesPuertos)
                 return acumulacionPosiblesPuertos[0]
               
               }
@@ -3199,7 +3201,6 @@ botonStreaming.addEventListener("mousedown", () => {
                 passphrase = passPhraseOK[0]
             }
             let latency = 1
-            console.log(aes)
             let llamada
             if(mode.length == 0){
                 llamada = ""
