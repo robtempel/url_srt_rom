@@ -2950,49 +2950,49 @@ botonStreaming.addEventListener("mousedown", () => {
                       return "12011 SRT 1.1"
                       break;
                     case b.includes("12012"):
-                      return "12011 SRT 1.2"
+                      return "12012 SRT 1.2"
                       break;
                     case b.includes("12013"):
-                      return "12011 SRT 1.3"
+                      return "12013 SRT 1.3"
                       break;
                     case b.includes("12014"):
-                      return "12011 SRT 1.4"
+                      return "12014 SRT 1.4"
                       break;
                     case b.includes("12021"):
                       return "12021 SRT 2.1"
                       break;
                     case b.includes("12022"):
-                      return "12021 SRT 2.2"
+                      return "12022 SRT 2.2"
                       break;
                     case b.includes("12023"):
-                      return "12021 SRT 2.3"
+                      return "12023 SRT 2.3"
                       break;
                     case b.includes("12024"):
-                      return "12021 SRT 2.4"
+                      return "12024 SRT 2.4"
                       break;
                     case b.includes("12031"):
                       return "12031 SRT 3.1"
                       break;
                     case b.includes("12032"):
-                      return "12031 SRT 3.2"
+                      return "12032 SRT 3.2"
                       break;
                     case b.includes("12033"):
-                      return "12031 SRT 3.3"
+                      return "12033 SRT 3.3"
                       break;
                     case b.includes("12034"):
-                      return "12031 SRT 3.4"
+                      return "12034 SRT 3.4"
                       break;
                     case b.includes("12041"):
                       return "12041 SRT 4.1"
                       break;
                     case b.includes("12042"):
-                      return "12041 SRT 4.2"
+                      return "12042 SRT 4.2"
                       break;
                     case b.includes("12043"):
-                      return "12041 SRT 4.3"
+                      return "12043 SRT 4.3"
                       break;
                     case b.includes("12044"):
-                      return "12041 SRT 4.4"
+                      return "12044 SRT 4.4"
                       break;
                     default:
                       return ""
