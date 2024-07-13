@@ -3317,12 +3317,12 @@ function backGround(){
     .then(response => response.text())
     .then(data => {
 
-        let temp = data.split('	-----')
+        let temp = data.split('\n')
         temp.sort()
         const randomIndex = Math.floor(Math.random()*1000);
         const randomImage = temp[randomIndex % temp.length];
         document.body.style.backgroundImage = `url(${randomImage})`;
-        //console.log(randomImage)
+        console.log(randomImage)
     })
 
 }
