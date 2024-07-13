@@ -3152,9 +3152,8 @@ botonStreaming.addEventListener("mousedown", () => {
       
               if(numeroIP.length > 0 && puerto.length == 0){
                 let puertoRequerido = buscarPuerto(paramSplitPal, numeroIP)
-                puerto.push(puertoRequerido)
-
-                return `${numeroIP}:${puertoRequerido}${encripcion3}`
+                puerto.push(parseInt(puertoRequerido))
+                return `${numeroIP}:${puerto[0]}${encripcion3}`
               }
       
               if(numeroIP.length == 0 && puerto.length > 0){
