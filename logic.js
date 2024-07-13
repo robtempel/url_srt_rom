@@ -2759,8 +2759,27 @@ botonStreaming.addEventListener("mousedown", () => {
         <div id="ventanaResumenSAT" class="ventanaSAT2">
             <text id="resumenSRT" class="resultadoSAT">Detalles Lista de grabaciones</text><br>
         </div>
-        <div id="ventanaResumenSAT" class="ventanaSAT2">
+        <div id="ventanaResumenSAT" class="ventanaURL2">
             <text id="urlCHAIN" class="resultadoSAT">URL para hacer llamada por VLC</text>
+            <svg viewBox="0 0 100 100" class="iconVLC">
+                <style>
+                    .st0{fill:#F57C00;}
+                    .st1{fill:#DDDDDD;}
+                    .st2{fill:#FF9800;}
+                </style>
+                    <path id="XMLID_6_" class="st0" d="M84.1,63.4c0,0-0.3-2.3-3.5-2.3h-7l2,6.8c1.4,4.2,2.6,7.7,2.6,9.2c0,6.6-12.6,11.7-28.1,11.7
+                        c-15.5,0-28.1-5.1-28.1-11.7c0-1.8,1.1-5,2.5-9.1l2.1-6.9h-7.1c-2.2,0-2.6,2.1-2.6,2.1L6,97.2l1.8,2.8H93l1-2.8L84.1,63.4z"/>
+                    <path id="XMLID_5_" class="st1" d="M50.1,77.8c11.9,0,22.2-4.9,25.4-9.9l-2-6.8l-3-10.2c0,0-5.6,7.5-20.5,7.5
+                        c-14.8,0-20.5-7.4-20.5-7.4l-3,10.2L24.3,68C27.5,73.1,38.1,77.8,50.1,77.8z"/>
+                    <path id="XMLID_4_" class="st1" d="M50,36.1c8.7,0,13.7-3.3,14.6-4l0.2-0.1L59,13.4c0,0-2.5,3.3-9,3.3c-6.5,0-9-3.3-9-3.3L35.2,32
+                        l0.1,0.1C36.3,32.7,41.3,36.1,50,36.1z"/>
+                    <path id="XMLID_3_" class="st2" d="M50,58.3c14.9,0,20.5-7.5,20.5-7.5L64.8,32c0,0-0.1,0-0.2,0.1c-0.9,0.7-6,4-14.6,4
+                        c-8.7,0-13.8-3.4-14.6-4C35.3,32,35.2,32,35.2,32l-5.8,18.9C29.5,50.9,35.2,58.3,50,58.3z"/>
+                    <path id="XMLID_2_" class="st2" d="M50.1,77.8c-12.1,0-22.7-4.7-25.8-9.8c-1.4,4.1-2.5,7.4-2.5,9.1c0,6.6,12.6,11.7,28.1,11.7
+                        c15.5,0,28.1-5.1,28.1-11.7c0-1.5-1.2-5-2.6-9.2C72.3,72.9,62.1,77.8,50.1,77.8z"/>
+                    <path id="XMLID_1_" class="st2" d="M50,16.7c6.5,0,9-3.3,9-3.3L55.2,1.1c0,0-0.2-1.1-5.2-1.1c-5.1,0-5.2,1.1-5.2,1.1L41,13.3
+                        C41,13.3,43.5,16.7,50,16.7z"/>
+            </svg>
         </div>
         
         
