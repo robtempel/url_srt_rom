@@ -2823,7 +2823,7 @@ botonStreaming.addEventListener("mousedown", () => {
                 return `modo Listener: Puerto ${listener}`
               }else{
                 llamadaModo.push("caller")
-                return `modo caller: ${seguirbuscando(a)}`
+                return `${seguirbuscando(a)}`
             }
       
             function checkModoListener(b){
