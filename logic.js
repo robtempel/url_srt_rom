@@ -2336,10 +2336,10 @@ botonSatelital.addEventListener("mousedown", () => {
         if (subsVerifPol.includes(" HORI")||subsVerifPol.includes(" H ")||subsVerifPol.includes(" X ")||subsVerifPol.includes("(H)")){
         pol4 = "H"
         }
-        if (subsVerifPol.includes("RHCP")||subsVerifPol.includes(" R ")){
+        if (subsVerifPol.includes("RHCP")||subsVerifPol.includes(" R ")|| subsVerifPol.includes("RIGHT-HAND")){
         pol4 = "R"
         }
-        if (subsVerifPol.includes("LHCP")||subsVerifPol.includes(" L ")){
+        if (subsVerifPol.includes("LHCP")||subsVerifPol.includes(" L ")|| subsVerifPol.includes("LEF-HAND")){
         pol4 = "L"
         }
 
