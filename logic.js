@@ -2709,8 +2709,8 @@ botonSatelital.addEventListener("mousedown", () => {
         if (resultCa.length==16){
         cotaCA = "Biss-E"
         }else{
-        if(resultCa.includes("BISS-CA")){
-            cotaCA = ""
+        if(parametrosM.includes("BISS-CA")){
+            cotaCA = "Biss-CA"
         }
         }
 
