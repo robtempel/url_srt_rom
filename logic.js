@@ -543,8 +543,7 @@ botonSatelital.addEventListener("mousedown", () => {
 
     function procesador(a){
         //--------------------- Reemplazar saltos de linea y tabuladores x espacios ---------------------//
-        let textoSinSaltos0 = a.replace(/\t/g, " ");
-        let textoSinSaltos = textoSinSaltos0.replace(/\n/g, " ");
+        let textoSinSaltos = a.replace(/\t/g, " ").replace(/\n/g, " ").replace(/\r/g, " ").replace(/\[[^\]]*\]/g, '')
 
 
         //--------------------- Generar variables de uso frecuente ---------------------//
