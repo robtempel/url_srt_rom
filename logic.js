@@ -3337,5 +3337,5 @@ const randomIndex = Math.floor(Math.random()*1000);
 const randomImage = imagebank[randomIndex % imagebank.length];
 document.body.style.backgroundImage = `url(${randomImage})`;
 
-setInterval(imagebankCH, 10000)
+//setInterval(imagebankCH, 10000)
 
