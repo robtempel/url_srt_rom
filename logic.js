@@ -3308,7 +3308,7 @@ transcode.addEventListener("click", () => {
 
     `
 })
-
+/*
 const imagebank = []
 
 let ubicaciondeltxt = 'imagenes.txt'
@@ -3339,3 +3339,4 @@ document.body.style.backgroundImage = `url(${randomImage})`;
 
 //setInterval(imagebankCH, 10000)
 
+*/
